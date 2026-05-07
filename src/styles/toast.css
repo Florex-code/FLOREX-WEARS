@@ -1,0 +1,8 @@
+.toastHost{position:fixed;right:16px;bottom:16px;display:flex;flex-direction:column;gap:10px;z-index:9999;width:min(360px,calc(100vw - 32px));}
+.toast{display:flex;align-items:flex-start;gap:10px;padding:12px 14px;border-radius:16px;border:1px solid var(--line);background:color-mix(in oklab, var(--card) 92%, transparent);box-shadow:var(--shadow);animation:slideInRight .18s ease both;}
+.toastDot{width:10px;height:10px;border-radius:999px;margin-top:4px;background:var(--brand2);}
+.toast.info .toastDot{background:var(--brand2);}
+.toast.good .toastDot{background:var(--good);}
+.toast.warn .toastDot{background:var(--warn);}
+.toast.bad .toastDot{background:var(--bad);}
+.toastMsg{color:var(--text);line-height:1.35}

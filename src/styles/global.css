@@ -1,0 +1,81 @@
+:root{
+  --bg:#0b0f17; --card:#101827; --text:#e7eefc; --muted:rgba(231,238,252,.72);
+  --line:rgba(231,238,252,.12); --brand:#7c3aed; --brand2:#06b6d4;
+  --good:#22c55e; --warn:#f59e0b; --bad:#ef4444;
+  --shadow:0 14px 45px rgba(0,0,0,.35);
+  --radius:18px; --container:1180px;
+  --font:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial,"Apple Color Emoji","Segoe UI Emoji";
+}
+[data-theme="light"]{
+  --bg:#f6f7fb; --card:#ffffff; --text:#111827; --muted:rgba(17,24,39,.68);
+  --line:rgba(17,24,39,.10); --shadow:0 14px 45px rgba(17,24,39,.12);
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0; font-family:var(--font); color:var(--text);
+  background:
+    radial-gradient(900px 520px at 20% -10%, color-mix(in oklab, var(--brand) 22%, transparent) 0%, transparent 55%),
+    radial-gradient(900px 520px at 90% 0%, color-mix(in oklab, var(--brand2) 20%, transparent) 0%, transparent 56%),
+    linear-gradient(180deg, color-mix(in oklab, var(--bg) 96%, #000 4%), var(--bg));
+}
+a{color:inherit;text-decoration:none}
+button,input,select,textarea{font:inherit}
+img{max-width:100%;display:block}
+.container{max-width:var(--container);margin:0 auto;padding:0 18px;}
+.section{padding:34px 0;}
+.card{
+  background:color-mix(in oklab, var(--card) 92%, transparent);
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  box-shadow:var(--shadow);
+  backdrop-filter: blur(10px);
+}
+.grid{display:grid;gap:16px;}
+.h1{font-size:clamp(30px,3vw,46px);letter-spacing:-0.02em;line-height:1.04;}
+.h2{font-size:clamp(20px,2.2vw,30px);letter-spacing:-0.02em;line-height:1.1;}
+.p{color:var(--muted);line-height:1.6}
+.badge{
+  display:inline-flex;align-items:center;gap:8px;padding:8px 12px;
+  border:1px solid var(--line);border-radius:999px;color:var(--muted);
+  background:color-mix(in oklab, var(--card) 86%, transparent);
+}
+.kbd{font-size:12px;padding:3px 8px;border-radius:8px;border:1px solid var(--line);color:var(--muted);}
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:10px;
+  padding:10px 14px;border-radius:14px;border:1px solid var(--line);
+  color:var(--text);
+  background:linear-gradient(180deg, color-mix(in oklab, var(--card) 88%, transparent), color-mix(in oklab, var(--card) 75%, transparent));
+  box-shadow:0 10px 30px rgba(0,0,0,.15);
+  cursor:pointer;transition:transform .16s ease,border-color .16s ease,filter .16s ease;
+  user-select:none;
+}
+.btn:hover{transform:translateY(-1px);border-color:color-mix(in oklab, var(--brand) 35%, var(--line));}
+.btn:active{transform:translateY(0);filter:brightness(.98);}
+.btn.primary{
+  border-color:color-mix(in oklab, var(--brand) 45%, var(--line));
+  background:linear-gradient(135deg, color-mix(in oklab, var(--brand) 72%, #000), color-mix(in oklab, var(--brand2) 62%, #000));
+}
+.btn.ghost{background:transparent;box-shadow:none;}
+.btn.danger{
+  border-color:color-mix(in oklab, var(--bad) 60%, var(--line));
+  background:linear-gradient(135deg, color-mix(in oklab, var(--bad) 62%, #000), color-mix(in oklab, var(--brand) 30%, #000));
+}
+.input,.select,.textarea{
+  width:100%;padding:12px 12px;border-radius:14px;border:1px solid var(--line);
+  background:color-mix(in oklab, var(--card) 86%, transparent);
+  color:var(--text);outline:none;transition:border-color .16s ease;
+}
+.input:focus,.select:focus,.textarea:focus{border-color:color-mix(in oklab, var(--brand) 55%, var(--line));}
+.hr{height:1px;background:var(--line);margin:16px 0;}
+.small{font-size:13px;color:var(--muted);}
+.muted{color:var(--muted);}
+.price{font-weight:750;letter-spacing:-0.02em;}
+.strike{text-decoration:line-through;opacity:.7;}
+.row{display:flex;gap:12px;align-items:center;}
+.space{display:flex;justify-content:space-between;align-items:center;gap:12px;}
+.wrap{flex-wrap:wrap;}
+.right{margin-left:auto;}
+@media(max-width:880px){.hide-sm{display:none !important;}}
+@keyframes pop{from{transform:translateY(8px);opacity:0}to{transform:translateY(0);opacity:1}}
+@keyframes slideInRight{from{transform:translateX(24px);opacity:0}to{transform:translateX(0);opacity:1}}

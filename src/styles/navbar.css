@@ -1,0 +1,150 @@
+.navWrap {
+  position: sticky;
+  top: 0;
+  z-index: 9997;
+  border-bottom: 1px solid var(--line);
+  background: color-mix(in oklab, var(--bg) 88%, transparent);
+  backdrop-filter: blur(10px);
+}
+
+.navBar {
+  padding: 12px 0;
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.navLogo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  color: var(--text);
+}
+
+.navMark {
+  width: 36px;
+  height: 36px;
+  display: grid;
+  place-items: center;
+  border-radius: 14px;
+  background: linear-gradient(135deg, var(--brand), var(--brand2));
+  font-weight: 900;
+}
+
+.navName {
+  font-weight: 900;
+  letter-spacing: -0.03em;
+}
+
+.navTag {
+  margin-left: 8px;
+  color: var(--muted);
+  font-size: 13px;
+  border-left: 1px solid var(--line);
+  padding-left: 10px;
+}
+
+.navLinks {
+  display: flex;
+  gap: 8px;
+  margin-left: 10px;
+}
+
+.navLink {
+  padding: 9px 10px;
+  border-radius: 12px;
+  color: var(--muted);
+  border: 1px solid transparent;
+}
+
+.navLink.active,
+.navLink:hover {
+  color: var(--text);
+  border-color: var(--line);
+  background: color-mix(in oklab, var(--card) 88%, transparent);
+}
+
+.navActions {
+  display: flex;
+  gap: 10px;
+  margin-left: auto;
+  align-items: center;
+}
+
+.navPill {
+  margin-left: 6px;
+  min-width: 28px;
+  height: 24px;
+  padding: 0 8px;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0,0,0,.18);
+  font-weight: 800;
+}
+
+.hamburgerBtn {
+  display: none;
+  border: 1px solid var(--line);
+  background: color-mix(in oklab, var(--card) 88%, transparent);
+  color: var(--text);
+  border-radius: 14px;
+  padding: 10px 14px;
+  font-size: 22px;
+  cursor: pointer;
+}
+
+.mobileMenu {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .navBar {
+    padding: 10px 0;
+  }
+
+  .navTag,
+  .navLinks,
+  .navDesktopOnly {
+    display: none !important;
+  }
+
+  .navName {
+    font-size: 14px;
+  }
+
+  .hamburgerBtn {
+    display: block;
+  }
+
+  .mobileMenu {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 14px;
+    border-top: 1px solid var(--line);
+    background: var(--bg);
+  }
+
+  .mobileMenu a,
+  .mobileMenu button {
+    width: 100%;
+    text-align: left;
+    padding: 14px 16px;
+    border-radius: 14px;
+    border: 1px solid var(--line);
+    background: color-mix(in oklab, var(--card) 88%, transparent);
+    color: var(--text);
+    font-size: 16px;
+    cursor: pointer;
+  }
+
+  .mobileMenu a:hover,
+  .mobileMenu button:hover {
+    background: color-mix(in oklab, var(--brand) 18%, var(--card));
+  }
+}

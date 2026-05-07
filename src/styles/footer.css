@@ -1,0 +1,237 @@
+/* Footer Container */
+.footer {
+  margin-top: 80px; /* Increased spacing from content */
+  background: linear-gradient(180deg, 
+    color-mix(in oklab, var(--bg) 100%, transparent) 0%, 
+    color-mix(in oklab, var(--card) 30%, var(--bg)) 100%
+  );
+  border-top: 1px solid var(--line);
+}
+
+/* Main Grid */
+.footerGrid {
+  display: grid;
+  gap: 48px;
+  grid-template-columns: 2fr 1fr 1fr 1.5fr;
+  padding: 64px 0 48px;
+}
+
+@media (max-width: 900px) {
+  .footerGrid {
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    padding: 48px 0 32px;
+  }
+  .footerBrandCol {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 600px) {
+  .footerGrid {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+}
+
+/* Brand Column */
+.footerBrandCol {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.footerBrand {
+  display: flex;
+  gap: 14px;
+  align-items: center;
+}
+
+.footerMark {
+  width: 50px;
+  height: 50px;
+  border-radius: 16px;
+  display: grid;
+  place-items: center;
+  background: linear-gradient(135deg, 
+    color-mix(in oklab, var(--brand) 85%, #fff), 
+    color-mix(in oklab, var(--brand2) 75%, #fff)
+  );
+  font-weight: 900;
+  font-size: 20px;
+  color: white;
+  box-shadow: 0 4px 15px color-mix(in oklab, var(--brand) 30%, transparent);
+}
+
+.footerName {
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  font-size: 18px;
+}
+
+.footerTag {
+  color: var(--muted);
+  font-size: 13px;
+  margin-top: 2px;
+}
+
+.footerDesc {
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.6;
+  max-width: 300px;
+  margin: 0;
+}
+
+.footerContact {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 13px;
+  color: var(--muted);
+  margin-top: 8px;
+}
+
+/* Link Columns */
+.footerCol {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.footerHead {
+  font-weight: 800;
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 4px;
+  color: var(--text);
+}
+
+.footerLink {
+  color: var(--muted);
+  text-decoration: none;
+  font-size: 14px;
+  transition: color 0.2s ease, transform 0.2s ease;
+  display: inline-block;
+}
+
+.footerLink:hover {
+  color: var(--brand);
+  transform: translateX(4px);
+}
+
+.footerText {
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* Newsletter Form */
+.footerForm {
+  display: flex;
+  gap: 10px;
+  margin-top: 8px;
+}
+
+.footerInput {
+  flex: 1;
+  padding: 10px 14px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: color-mix(in oklab, var(--card) 50%, transparent);
+  color: var(--text);
+  font-size: 14px;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.footerInput:focus {
+  outline: none;
+  border-color: var(--brand);
+  box-shadow: 0 0 0 3px color-mix(in oklab, var(--brand) 15%, transparent);
+}
+
+.footerInput::placeholder {
+  color: var(--muted);
+}
+
+/* Social Links */
+.footerSocials {
+  display: flex;
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.socialLink {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1px solid var(--line);
+  display: grid;
+  place-items: center;
+  color: var(--muted);
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+
+.socialLink:hover {
+  background: var(--brand);
+  border-color: var(--brand);
+  color: white;
+  transform: translateY(-2px);
+}
+
+/* Bottom Bar */
+.footerBottom {
+  border-top: 1px solid var(--line);
+  padding: 24px 0;
+  background: color-mix(in oklab, var(--card) 20%, var(--bg));
+}
+
+.footerBottomContent {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.footerLegal {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.footerLegal a {
+  color: var(--muted);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.footerLegal a:hover {
+  color: var(--brand);
+}
+
+.footerTech {
+  font-size: 12px;
+  color: var(--muted);
+  font-family: monospace;
+  opacity: 0.7;
+}
+
+@media (max-width: 600px) {
+  .footerBottomContent {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .footerLegal {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+}

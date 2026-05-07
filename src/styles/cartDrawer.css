@@ -1,0 +1,27 @@
+.drawerOverlay{position:fixed;inset:0;background:rgba(0,0,0,0);pointer-events:none;transition:background .2s ease;z-index:9996;}
+.drawerOverlay.open{background:rgba(0,0,0,.35);pointer-events:auto;}
+.drawer{position:fixed;right:12px;top:12px;bottom:12px;width:min(420px,calc(100vw - 24px));
+  border-radius:22px;border:1px solid var(--line);background:color-mix(in oklab, var(--card) 92%, transparent);
+  box-shadow:var(--shadow);transform:translateX(120%);transition:transform .22s ease;z-index:9997;display:flex;flex-direction:column; @media (max-width: 600px) {
+  .drawer {
+    width: calc(100vw - 36px);
+    max-width: 420px;
+    right: 18px;
+    left: auto;
+    border-radius: 24px;
+  }
+}}
+.drawer.open{transform:translateX(0);}
+.drawerTop{padding:14px;border-bottom:1px solid var(--line);display:flex;align-items:flex-start;justify-content:space-between;gap:12px;}
+.drawerBody{padding:14px;overflow:auto;flex:1;}
+.drawerBottom{padding:14px;border-top:1px solid var(--line);}
+.drawerList{display:flex;flex-direction:column;gap:12px;}
+.drawerItem{display:grid;grid-template-columns:92px 1fr;gap:12px;padding:10px;border-radius:18px;border:1px solid var(--line);
+  background:color-mix(in oklab, var(--card) 86%, transparent);}
+.drawerThumb{width:92px;height:92px;border-radius:16px;overflow:hidden;border:1px solid var(--line);background:rgba(0,0,0,.08);}
+.drawerThumb img{width:100%;height:100%;object-fit:cover;}
+.drawerName{font-weight:860;letter-spacing:-0.02em;}
+.qtyBtn{width:32px;height:32px;border-radius:12px;border:1px solid var(--line);background:transparent;color:var(--text);cursor:pointer;}
+.qtyInput{width:46px;height:32px;text-align:center;border-radius:12px;border:1px solid var(--line);background:transparent;color:var(--text);outline:none;}
+.drawerEmpty{height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;text-align:center;}
+.drawerEmptyIcon{font-size:44px;}
