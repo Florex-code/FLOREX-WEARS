@@ -25,3 +25,28 @@
 .qtyInput{width:46px;height:32px;text-align:center;border-radius:12px;border:1px solid var(--line);background:transparent;color:var(--text);outline:none;}
 .drawerEmpty{height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;text-align:center;}
 .drawerEmptyIcon{font-size:44px;}
+@media (max-width: 600px) {
+  .drawer {
+    top: auto;
+    right: 0;
+    left: 0;
+    bottom: 0;
+
+    width: 100%;
+    max-width: none;
+    height: 72vh;
+
+    border-radius: 28px 28px 0 0;
+    padding: 18px;
+
+    transform: translateY(100%);
+  }
+
+  .drawer.open {
+    transform: translateY(0);
+  }
+
+  .drawerBackdrop {
+    background: rgba(0, 0, 0, 0.45);
+  }
+}

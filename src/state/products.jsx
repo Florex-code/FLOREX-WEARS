@@ -1,30 +1,44 @@
 import React from "react";
-import { getProducts } from "../lib/products";
+import {
+  getProducts,
+  createProduct,
+  updateProduct,
+  deleteProduct,
+} from "../lib/products";
 
 const Ctx = React.createContext(null);
 
 export function ProductsProvider({ children }) {
   const [products, setProducts] = React.useState([]);
+  const [loading, setLoading] = React.useState(true);
+
+  async function refreshProducts() {
+    setLoading(true);
+    const data = await getProducts();
+    setProducts(data);
+    setLoading(false);
+  }
 
   React.useEffect(() => {
-    async function loadProducts() {
-      const data = await getProducts();
-      setProducts(data);
-    }
-
-    loadProducts();
+    refreshProducts();
   }, []);
 
-  function upsert(product) {
-    console.log("Admin save will connect to Supabase next:", product);
+  async function upsert(product) {
+    let saved;
+
+    if (product.id) {
+      saved = await updateProduct(product.id, product);
+    } else {
+      saved = await createProduct(product);
+    }
+
+    await refreshProducts();
+    return saved.id;
   }
 
-  function remove(id) {
-    console.log("Delete will connect to Supabase next:", id);
-  }
-
-  function resetToSeed() {
-    setProducts([]);
+  async function remove(id) {
+    await deleteProduct(id);
+    await refreshProducts();
   }
 
   function getById(id) {
@@ -40,10 +54,10 @@ export function ProductsProvider({ children }) {
     <Ctx.Provider
       value={{
         products,
-        setProducts,
+        loading,
+        refreshProducts,
         upsert,
         remove,
-        resetToSeed,
         getById,
         categories,
       }}

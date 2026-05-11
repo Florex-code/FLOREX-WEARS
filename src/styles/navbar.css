@@ -89,13 +89,19 @@
 
 .hamburgerBtn {
   display: none;
+  width: 46px;
+  height: 46px;
+  border-radius: 14px;
   border: 1px solid var(--line);
   background: color-mix(in oklab, var(--card) 88%, transparent);
   color: var(--text);
-  border-radius: 14px;
-  padding: 10px 14px;
   font-size: 22px;
   cursor: pointer;
+  transition: .25s ease;
+}
+
+.hamburgerBtn:hover {
+  transform: scale(1.04);
 }
 
 .mobileMenu {
@@ -103,6 +109,7 @@
 }
 
 @media (max-width: 768px) {
+
   .navBar {
     padding: 10px 0;
   }
@@ -118,33 +125,76 @@
   }
 
   .hamburgerBtn {
-    display: block;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   .mobileMenu {
+    position: absolute;
+    top: 72px;
+    right: 14px;
+
+    width: 230px;
+
     display: flex;
     flex-direction: column;
-    gap: 10px;
-    padding: 14px;
-    border-top: 1px solid var(--line);
-    background: var(--bg);
+    gap: 8px;
+
+    padding: 12px;
+
+    border-radius: 24px;
+
+    background: color-mix(in oklab, var(--card) 94%, black);
+
+    border: 1px solid var(--line);
+
+    box-shadow:
+      0 20px 60px rgba(0,0,0,.45);
+
+    backdrop-filter: blur(20px);
+
+    animation: menuIn .22s ease;
+    z-index: 9999;
   }
 
   .mobileMenu a,
   .mobileMenu button {
     width: 100%;
-    text-align: left;
-    padding: 14px 16px;
-    border-radius: 14px;
-    border: 1px solid var(--line);
-    background: color-mix(in oklab, var(--card) 88%, transparent);
+    border: none;
+    background: transparent;
     color: var(--text);
-    font-size: 16px;
+
+    padding: 13px 14px;
+
+    border-radius: 14px;
+
+    text-align: left;
+
+    font-size: 15px;
+    font-weight: 600;
+
     cursor: pointer;
+
+    transition: .22s ease;
   }
 
   .mobileMenu a:hover,
   .mobileMenu button:hover {
-    background: color-mix(in oklab, var(--brand) 18%, var(--card));
+    background:
+      color-mix(in oklab,
+      var(--brand) 12%,
+      transparent);
+  }
+}
+
+@keyframes menuIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px) scale(.96);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
   }
 }

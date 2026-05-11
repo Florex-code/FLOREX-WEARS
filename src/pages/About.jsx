@@ -78,7 +78,7 @@ export default function About() {
             <div className="storyCard">
               <div className="storyIcon">F</div>
               <div className="storyBrand">FLOREX-WEARS</div>
-              <div className="storyEst">Est. 2020</div>
+              <div className="storyEst">Est. 2026</div>
             </div>
           </div>
         </div>

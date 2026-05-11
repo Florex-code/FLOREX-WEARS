@@ -36,8 +36,8 @@ export default function Home() {
               Dress like the <span className="heroTitleAccent">decision</span> is already made.
             </h1>
             <p className="heroDesc">
-              FLOREX-WEARS is a premium demo clothing store built with React + Vite. 
-              Clean layout, fast pages, smooth UX, and protected checkout.
+              FLOREX-WEARS is a premium clothing store. 
+              It possesses a clean layout, fast pages, smooth UX, and protected checkout.
             </p>
             <div className="heroActions">
               <Link className="btn primary heroCta" to="/shop">Shop Collection</Link>

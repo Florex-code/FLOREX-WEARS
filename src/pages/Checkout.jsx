@@ -16,7 +16,58 @@ export default function Checkout() {
   const [address, setAddress] = React.useState("");
   const [loading, setLoading] = React.useState(false);
 
-  async function pay(e) {
+  React.useEffect(() => {
+    const script = document.createElement("script");
+    script.src = "https://js.paystack.co/v1/inline.js";
+    script.async = true;
+
+    document.body.appendChild(script);
+
+    return () => {
+      document.body.removeChild(script);
+    };
+  }, []);
+
+  async function savePaidOrder(reference) {
+    const orderItems = items.map((it) => ({
+      product_id: it.id,
+      name: it.name,
+      price: it.price,
+      qty: it.qty,
+      size: it.size,
+      color: it.color,
+      image: it.image,
+    }));
+
+    const { error } = await supabase.from("orders").insert({
+      user_email: user.email,
+      full_name: name,
+      phone,
+      address,
+      items: orderItems,
+      total: subtotal,
+      status: "paid",
+      payment_reference: reference,
+    });
+
+    setLoading(false);
+
+    if (error) {
+      console.error(error);
+      toast.push("Payment succeeded but order save failed.", "bad");
+      return;
+    }
+
+    clear();
+
+    toast.push("Payment successful 🎉", "good");
+
+    setTimeout(() => {
+      window.location.href = "/";
+    }, 1500);
+  }
+
+  function pay(e) {
     e.preventDefault();
 
     if (!items.length) {
@@ -29,51 +80,67 @@ export default function Checkout() {
       return;
     }
 
-    setLoading(true);
-
-    const orderItems = items.map((it) => ({
-      product_id: it.id,
-      name: it.name,
-      price: it.price,
-      qty: it.qty,
-      size: it.size,
-      color: it.color,
-      image: it.image,
-    }));
-
-    const { error } = await supabase.from("orders").insert({
-      user_email: user?.email,
-      full_name: name,
-      phone,
-      address,
-      items: orderItems,
-      total: subtotal,
-      status: "pending",
-    });
-
-    setLoading(false);
-
-    if (error) {
-      console.error(error);
-      toast.push("Order failed. Please try again.", "bad");
+    if (!user?.email) {
+      toast.push("Please login first.", "bad");
       return;
     }
 
-    clear();
-    toast.push("Order placed successfully.", "good");
+    const publicKey = import.meta.env.VITE_PAYSTACK_PUBLIC_KEY;
+
+    if (!publicKey) {
+      toast.push("Paystack key missing.", "bad");
+      return;
+    }
+
+    if (!window.PaystackPop) {
+      toast.push("Paystack failed to load.", "bad");
+      return;
+    }
+
+    setLoading(true);
+
+    const handler = window.PaystackPop.setup({
+      key: publicKey,
+      email: user.email,
+      amount: Number(subtotal) * 100,
+      currency: "NGN",
+      ref: "FXW_" + Date.now(),
+
+      callback: function (response) {
+        savePaidOrder(response.reference);
+      },
+
+      onClose: function () {
+        setLoading(false);
+        toast.push("Payment cancelled.", "warn");
+      },
+    });
+
+    handler.openIframe();
   }
 
   return (
     <div className="container section">
-      <div className="grid" style={{ gridTemplateColumns: "1.05fr .95fr", gap: 16 }}>
+      <div
+        className="grid"
+        style={{
+          gridTemplateColumns: "1.05fr .95fr",
+          gap: 16,
+        }}
+      >
         <div className="card" style={{ padding: 18 }}>
           <div className="badge">🧾 Checkout</div>
-          <h1 className="h2" style={{ margin: "12px 0 6px" }}>
+
+          <h1
+            className="h2"
+            style={{ margin: "12px 0 6px" }}
+          >
             Delivery details
           </h1>
 
           <form onSubmit={pay}>
             <div className="small">Full name</div>
+
             <input
               className="input"
               value={name}
@@ -84,16 +151,18 @@ export default function Checkout() {
             <div style={{ height: 10 }} />
 
             <div className="small">Phone</div>
+
             <input
               className="input"
               value={phone}
               onChange={(e) => setPhone(e.target.value)}
-              placeholder="+234…"
+              placeholder="+234..."
             />
 
             <div style={{ height: 10 }} />
 
             <div className="small">Address</div>
+
             <textarea
               className="textarea"
               rows="4"
@@ -102,26 +171,50 @@ export default function Checkout() {
               placeholder="Delivery address"
             />
 
-            <div className="row" style={{ marginTop: 14 }}>
-              <button className="btn primary" type="submit" disabled={loading}>
-                {loading ? "Placing order..." : "Place order"}
+            <div
+              className="row"
+              style={{ marginTop: 14 }}
+            >
+              <button
+                className="btn primary"
+                type="submit"
+                disabled={loading}
+              >
+                {loading ? "Processing..." : "Pay with Paystack"}
               </button>
-              <span className="badge">Payment comes next</span>
+
+              <span className="badge">
+                Secure payment
+              </span>
             </div>
           </form>
         </div>
 
         <div className="card" style={{ padding: 18 }}>
-          <div style={{ fontWeight: 900 }}>Order summary</div>
+          <div style={{ fontWeight: 900 }}>
+            Order summary
+          </div>
+
           <div className="hr" />
 
           {items.length ? (
-            <div className="grid" style={{ gridTemplateColumns: "1fr", gap: 10 }}>
+            <div
+              className="grid"
+              style={{
+                gridTemplateColumns: "1fr",
+                gap: 10,
+              }}
+            >
               {items.map((it) => (
                 <div
                   key={it.key}
                   className="card"
-                  style={{ padding: 12, display: "flex", gap: 12 }}
+                  style={{
+                    padding: 12,
+                    display: "flex",
+                    gap: 12,
+                    alignItems: "center",
+                  }}
                 >
                   <div
                     style={{
@@ -144,28 +237,36 @@ export default function Checkout() {
                   </div>
 
                   <div style={{ flex: 1 }}>
-                    <div style={{ fontWeight: 900 }}>{it.name}</div>
+                    <div style={{ fontWeight: 900 }}>
+                      {it.name}
+                    </div>
+
                     <div className="small">
-                      {it.qty} × {money(it.price)} • {it.size} • {it.color}
+                      {it.qty} × {money(it.price)} •{" "}
+                      {it.size} • {it.color}
                     </div>
                   </div>
 
-                  <div className="price">{money(it.qty * it.price)}</div>
+                  <div className="price">
+                    {money(it.qty * it.price)}
+                  </div>
                 </div>
               ))}
             </div>
           ) : (
-            <div className="small">Empty cart.</div>
+            <div className="small">
+              Empty cart.
+            </div>
           )}
 
           <div className="hr" />
+
           <div className="space">
             <div className="small">Subtotal</div>
-            <div className="price">{money(subtotal)}</div>
-          </div>
 
-          <div className="small" style={{ marginTop: 10 }}>
-            After this, we’ll connect Paystack payment.
+            <div className="price">
+              {money(subtotal)}
+            </div>
           </div>
         </div>
       </div>
