@@ -25,9 +25,9 @@ export default function Navbar({ onOpenSearch }) {
     <header className="navWrap">
       <div className="container navBar">
         <button className="navLogo" onClick={() => nav("/")}>
-          <span className="navMark">F</span>
-          <span className="navName">FLOREX-WEARS</span>
-          <span className="navTag">premium street + smart casual</span>
+          <span className="navMark">A</span>
+          <span className="navName">Avenoir</span>
+          <span className="navTag">quiet luxury / modern essentials</span>
         </button>
 
         <nav className="navLinks">

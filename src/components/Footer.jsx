@@ -11,19 +11,19 @@ export default function Footer() {
         {/* Brand Column */}
         <div className="footerBrandCol">
           <div className="footerBrand">
-            <div className="footerMark">F</div>
+            <div className="footerMark">A</div>
             <div>
-              <div className="footerName">FLOREX-WEARS</div>
-              <div className="footerTag">Built for style. Engineered for confidence.</div>
+              <div className="footerName">Avenoir</div>
+              <div className="footerTag">Tailored presence. Everyday luxury.</div>
             </div>
           </div>
           <p className="footerDesc">
-            A premium clothing brand delivering quality fashion for the modern individual. 
-            Designed in Lagos, worn worldwide.
+            A premium fashion house for refined streetwear, polished essentials, and confident daily dressing.
+            Designed in Lagos, styled for everywhere.
           </p>
           <div className="footerContact">
             <span>Lagos, Nigeria</span>
-            <span>florexstudio.ng@gmail.com</span>
+            <span>atelier@avenoir.ng</span>
           </div>
         </div>
 
@@ -70,7 +70,7 @@ export default function Footer() {
       <div className="footerBottom">
         <div className="container footerBottomContent">
           <div className="footerLegal">
-            <span>© {currentYear} FLOREX-WEARS. All rights reserved.</span>
+            <span>© {currentYear} Avenoir. All rights reserved.</span>
             <Link to="/privacy">Privacy</Link>
             <Link to="/terms">Terms</Link>
             <Link to="/cookies">Cookies</Link>

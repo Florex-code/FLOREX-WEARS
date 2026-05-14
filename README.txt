@@ -1,4 +1,4 @@
-FLOREX-WEARS PREMIUM (React + Vite)
+AVENOIR (React + Vite)
 
 Run:
   npm install
@@ -18,5 +18,5 @@ Features:
 - Toast notifications
 
 Admin:
-  Email: admin@florexwears.com
+  Email: atelier@avenoir.ng
   Password: admin123

@@ -36,8 +36,8 @@ export default function About() {
           <span className="aboutLabel">About Us</span>
           <h1 className="aboutTitle">Redefining Modern Fashion</h1>
           <p className="aboutSubtitle">
-            Florex Wears is more than a clothing brand — we're a movement 
-            towards confident, sustainable, and expressive style.
+            Avenoir is more than a clothing label. It is a refined wardrobe language
+            for confident, intentional, and expressive style.
           </p>
         </div>
       </section>
@@ -62,10 +62,9 @@ export default function About() {
           <div className="storyContent">
             <h2>Our Story</h2>
             <p>
-              Founded in 2020, Florex Wears began with a simple mission: to create 
-              clothing that makes people feel confident and comfortable in their own skin. 
-              What started as a small studio in Lagos has grown into a global brand 
-              trusted by thousands.
+              Founded in Lagos, Avenoir began with a simple mission: to create
+              clothing that makes presence feel effortless. Every piece is designed
+              to move between sharp streetwear, quiet luxury, and polished everyday living.
             </p>
             <p>
               We believe that great style shouldn't come at the cost of comfort or 
@@ -76,8 +75,8 @@ export default function About() {
           </div>
           <div className="storyVisual">
             <div className="storyCard">
-              <div className="storyIcon">F</div>
-              <div className="storyBrand">FLOREX-WEARS</div>
+              <div className="storyIcon">A</div>
+              <div className="storyBrand">Avenoir Atelier</div>
               <div className="storyEst">Est. 2026</div>
             </div>
           </div>
@@ -104,7 +103,7 @@ export default function About() {
       <section className="aboutCtaSection">
         <div className="container">
           <div className="ctaCard">
-            <h2>Join the Florex Family</h2>
+            <h2>Join the Avenoir Circle</h2>
             <p>Be the first to know about new drops, exclusive deals, and styling tips.</p>
             <form className="ctaForm" onSubmit={(e) => e.preventDefault()}>
               <input type="email" placeholder="Enter your email address" required />

@@ -39,11 +39,11 @@ export default function Contact(){
         <div className="card" style={{padding:18}}>
           <div style={{fontWeight:900}}>Store info</div>
           <div className="hr" />
-          <div className="small">Email: <b>florexstudio.ng@gmail.com</b></div>
+          <div className="small">Email: <b>atelier@avenoir.ng</b></div>
           <div className="small" style={{marginTop:6}}>Location: <b>Lagos</b></div>
           <div className="hr" />
           <a
-  href="https://wa.me/2349138465408?text=Hi%20FLOREX-WEARS%2C%20I%20want%20to%20make%20an%20enquiry"
+  href="https://wa.me/2349138465408?text=Hi%20Avenoir%2C%20I%20want%20to%20make%20an%20enquiry"
   target="_blank"
   rel="noreferrer"
   className="btn whatsapp-btn"

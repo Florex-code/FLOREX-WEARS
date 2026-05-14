@@ -21,7 +21,7 @@ export default function SearchModal({ open, onClose }){
   return (
     <Modal
       open={open}
-      title="Search FLOREX-WEARS"
+      title="Search Avenoir"
       onClose={onClose}
       footer={<div className="small">Tip: press <span className="kbd">Esc</span> to close.</div>}
     >

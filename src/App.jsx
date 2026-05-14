@@ -74,7 +74,7 @@ export default function App(){
       <Footer />
 
       <a
-  href="https://wa.me/2349138465408?text=Hi%20I%20want%20to%20order"
+  href="https://wa.me/2349138465408?text=Hi%20Avenoir%2C%20I%20want%20to%20order"
   className="whatsapp-float"
   target="_blank"
   rel="noreferrer"

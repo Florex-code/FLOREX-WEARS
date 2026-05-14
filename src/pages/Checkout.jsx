@@ -103,7 +103,7 @@ export default function Checkout() {
       email: user.email,
       amount: Number(subtotal) * 100,
       currency: "NGN",
-      ref: "FXW_" + Date.now(),
+      ref: "AVN_" + Date.now(),
 
       callback: function (response) {
         savePaidOrder(response.reference);

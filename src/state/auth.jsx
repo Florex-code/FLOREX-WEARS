@@ -3,7 +3,7 @@ import { supabase } from "../lib/supabase";
 
 const AuthCtx = React.createContext(null);
 
-const ADMIN_EMAIL = "florexstudio.ng@gmail.com";
+const ADMIN_EMAILS = ["florexstudio.ng@gmail.com", "atelier@avenoir.ng"];
 
 export function AuthProvider({ children }) {
   const [user, setUser] = React.useState(null);
@@ -26,7 +26,7 @@ export function AuthProvider({ children }) {
     };
   }, []);
 
-  const isAdmin = user?.email === ADMIN_EMAIL;
+  const isAdmin = ADMIN_EMAILS.includes(user?.email);
 
   return (
     <AuthCtx.Provider value={{ user, loading, isAdmin }}>

@@ -1475,6 +1475,204 @@
   border-top: 1px solid var(--line);
 }
 
+/* Account */
+.accountPage {
+  min-height: 70vh;
+}
+
+.accountHero {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 28px;
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  background:
+    linear-gradient(135deg,
+      color-mix(in oklab, var(--brand) 10%, var(--card)),
+      color-mix(in oklab, var(--brand2) 8%, var(--card)));
+  box-shadow: var(--shadow);
+  margin-bottom: 18px;
+}
+
+.accountIdentity {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  min-width: 0;
+}
+
+.accountAvatar {
+  width: 76px;
+  height: 76px;
+  flex: 0 0 auto;
+  display: grid;
+  place-items: center;
+  border-radius: 18px;
+  color: white;
+  font-size: 32px;
+  font-weight: 900;
+  background: linear-gradient(135deg, var(--brand), var(--brand2));
+  box-shadow: 0 18px 40px color-mix(in oklab, var(--brand) 28%, transparent);
+}
+
+.accountTitle {
+  margin: 14px 0 8px;
+  font-size: clamp(28px, 4vw, 44px);
+  line-height: 1.05;
+  letter-spacing: 0;
+}
+
+.accountSubtitle {
+  color: var(--muted);
+  max-width: 680px;
+  line-height: 1.6;
+  margin: 0;
+}
+
+.accountHeroActions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+.accountGrid {
+  display: grid;
+  grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr);
+  gap: 16px;
+}
+
+.accountPanel {
+  padding: 20px;
+  border-radius: 18px;
+}
+
+.accountPanelHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.accountPanelHeader h2 {
+  margin: 0;
+  font-size: 20px;
+  line-height: 1.2;
+}
+
+.accountStatus {
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 7px 10px;
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+.accountInfoList {
+  display: grid;
+  gap: 10px;
+}
+
+.accountInfoItem {
+  display: grid;
+  grid-template-columns: 110px minmax(0, 1fr);
+  gap: 12px;
+  align-items: center;
+  padding: 12px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: color-mix(in oklab, var(--card) 82%, transparent);
+}
+
+.accountInfoItem span,
+.accountAction span,
+.accountOrder span,
+.accountCare p,
+.accountEmpty {
+  color: var(--muted);
+}
+
+.accountInfoItem strong {
+  overflow-wrap: anywhere;
+}
+
+.accountActionGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.accountAction {
+  min-height: 112px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 14px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: color-mix(in oklab, var(--card) 82%, transparent);
+  transition: transform .18s ease, border-color .18s ease;
+}
+
+.accountAction:hover {
+  transform: translateY(-2px);
+  border-color: color-mix(in oklab, var(--brand) 36%, var(--line));
+}
+
+.accountOrders {
+  grid-column: span 2;
+}
+
+.accountOrderList {
+  display: grid;
+  gap: 10px;
+}
+
+.accountOrder {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  padding: 14px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: color-mix(in oklab, var(--card) 82%, transparent);
+}
+
+.accountOrder div:first-child {
+  display: grid;
+  gap: 4px;
+}
+
+.accountEmpty {
+  display: grid;
+  justify-items: start;
+  gap: 12px;
+  padding: 18px;
+  border: 1px dashed var(--line);
+  border-radius: 14px;
+}
+
+.accountCare {
+  grid-column: span 2;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+}
+
+.accountCare p {
+  max-width: 680px;
+  line-height: 1.6;
+  margin: 0;
+}
+
 .quickViewActions {
   display: flex;
   gap: 12px;
@@ -1726,6 +1924,33 @@
     width: 58px;
     height: 72px;
   }
+
+  .accountHero,
+  .accountIdentity,
+  .accountCare {
+    align-items: flex-start;
+  }
+
+  .accountHero,
+  .accountCare {
+    flex-direction: column;
+  }
+
+  .accountHeroActions,
+  .accountHeroActions .btn,
+  .accountCare .btn {
+    width: 100%;
+  }
+
+  .accountGrid,
+  .accountActionGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .accountOrders,
+  .accountCare {
+    grid-column: auto;
+  }
 }
 
 @media (max-width: 520px) {
@@ -1749,5 +1974,30 @@
   .quickViewMetaItem {
     flex-direction: column;
     gap: 4px;
+  }
+
+  .accountHero {
+    padding: 18px;
+  }
+
+  .accountIdentity {
+    flex-direction: column;
+  }
+
+  .accountAvatar {
+    width: 64px;
+    height: 64px;
+    border-radius: 16px;
+    font-size: 28px;
+  }
+
+  .accountInfoItem {
+    grid-template-columns: 1fr;
+    gap: 6px;
+  }
+
+  .accountOrder {
+    align-items: flex-start;
+    flex-direction: column;
   }
 }

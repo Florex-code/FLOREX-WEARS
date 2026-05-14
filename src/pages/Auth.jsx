@@ -58,7 +58,7 @@ export default function Auth(){
             </div>
 
             <div className="hr" />
-            <div className="small">Admin login: <b>florexstudio.ng@gmail.com</b> / <b>admin123</b></div>
+            <div className="small">Admin access is reserved for the Avenoir team.</div>
           </form>
         </div>
 

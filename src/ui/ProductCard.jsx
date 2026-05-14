@@ -8,7 +8,7 @@ export default function ProductCard({ p, onQuickView, onAdd }){
   return (
     <div className="pCard">
       <div className="pMedia">
-        <div className="pBadge">{p.badge || "FLOREX"}</div>
+        <div className="pBadge">{p.badge || "AVENOIR"}</div>
         <img src={imageUrl(p.images?.[0])} alt={p.name} loading="lazy" onError={(e)=>{e.currentTarget.style.opacity=.55}} />
         <div className="pHover">
           <button className="btn primary" onClick={()=>onAdd?.(p)}>Add to cart</button>
