@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { useCart } from "../state/cart.jsx";
 import { money } from "../utils/money.js";
 import { imageUrl } from "../utils/imageUrl.js";
@@ -20,11 +21,10 @@ export default function Checkout() {
     const script = document.createElement("script");
     script.src = "https://js.paystack.co/v1/inline.js";
     script.async = true;
-
     document.body.appendChild(script);
 
     return () => {
-      document.body.removeChild(script);
+      if (script.parentNode) script.parentNode.removeChild(script);
     };
   }, []);
 
@@ -41,9 +41,9 @@ export default function Checkout() {
 
     const { error } = await supabase.from("orders").insert({
       user_email: user.email,
-      full_name: name,
-      phone,
-      address,
+      full_name: name.trim(),
+      phone: phone.trim(),
+      address: address.trim(),
       items: orderItems,
       total: subtotal,
       status: "paid",
@@ -59,8 +59,7 @@ export default function Checkout() {
     }
 
     clear();
-
-    toast.push("Payment successful 🎉", "good");
+    toast.push("Payment successful. Your order is confirmed.", "good");
 
     setTimeout(() => {
       window.location.href = "/";
@@ -75,7 +74,7 @@ export default function Checkout() {
       return;
     }
 
-    if (!name || !phone || !address) {
+    if (!name.trim() || !phone.trim() || !address.trim()) {
       toast.push("Please fill delivery details.", "bad");
       return;
     }
@@ -120,152 +119,120 @@ export default function Checkout() {
   }
 
   return (
-    <div className="container section">
-      <div
-        className="grid"
-        style={{
-          gridTemplateColumns: "1.05fr .95fr",
-          gap: 16,
-        }}
-      >
-        <div className="card" style={{ padding: 18 }}>
-          <div className="badge">🧾 Checkout</div>
-
-          <h1
-            className="h2"
-            style={{ margin: "12px 0 6px" }}
-          >
-            Delivery details
-          </h1>
-
-          <form onSubmit={pay}>
-            <div className="small">Full name</div>
-
-            <input
-              className="input"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              placeholder="Full name"
-            />
-
-            <div style={{ height: 10 }} />
-
-            <div className="small">Phone</div>
-
-            <input
-              className="input"
-              value={phone}
-              onChange={(e) => setPhone(e.target.value)}
-              placeholder="+234..."
-            />
-
-            <div style={{ height: 10 }} />
-
-            <div className="small">Address</div>
-
-            <textarea
-              className="textarea"
-              rows="4"
-              value={address}
-              onChange={(e) => setAddress(e.target.value)}
-              placeholder="Delivery address"
-            />
-
-            <div
-              className="row"
-              style={{ marginTop: 14 }}
-            >
-              <button
-                className="btn primary"
-                type="submit"
-                disabled={loading}
-              >
-                {loading ? "Processing..." : "Pay with Paystack"}
-              </button>
-
-              <span className="badge">
-                Secure payment
-              </span>
-            </div>
-          </form>
+    <div className="checkoutPage">
+      <div className="container section">
+        <div className="checkoutHeader">
+          <div>
+            <div className="badge">Secure checkout</div>
+            <h1 className="h2 checkoutTitle">Complete your order</h1>
+            <p className="p checkoutCopy">
+              Confirm your delivery details, review your pieces, and pay safely with Paystack.
+            </p>
+          </div>
+          <div className="checkoutTrust">
+            <span>Protected payment</span>
+            <span>Order confirmation</span>
+            <span>Lagos delivery</span>
+          </div>
         </div>
 
-        <div className="card" style={{ padding: 18 }}>
-          <div style={{ fontWeight: 900 }}>
-            Order summary
+        <div className="checkoutGrid">
+          <div className="card checkoutPanel">
+            <div className="checkoutStep">1</div>
+            <h2 className="checkoutPanelTitle">Delivery details</h2>
+
+            <form onSubmit={pay} className="checkoutForm">
+              <label className="fieldLabel" htmlFor="checkout-name">Full name</label>
+              <input
+                id="checkout-name"
+                className="input"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                placeholder="Enter your full name"
+                autoComplete="name"
+                required
+              />
+
+              <label className="fieldLabel" htmlFor="checkout-phone">Phone</label>
+              <input
+                id="checkout-phone"
+                className="input"
+                value={phone}
+                onChange={(e) => setPhone(e.target.value)}
+                placeholder="+234..."
+                autoComplete="tel"
+                inputMode="tel"
+                required
+              />
+
+              <label className="fieldLabel" htmlFor="checkout-address">Delivery address</label>
+              <textarea
+                id="checkout-address"
+                className="textarea"
+                rows="4"
+                value={address}
+                onChange={(e) => setAddress(e.target.value)}
+                placeholder="House number, street, area, city"
+                autoComplete="street-address"
+                required
+              />
+
+              <div className="checkoutActions">
+                <button
+                  className="btn primary checkoutPayButton"
+                  type="submit"
+                  disabled={loading}
+                >
+                  {loading ? "Processing..." : "Pay with Paystack"}
+                </button>
+                <span className="small checkoutNote">
+                  You will review payment in a secure Paystack window.
+                </span>
+              </div>
+            </form>
           </div>
 
-          <div className="hr" />
+          <div className="card checkoutPanel checkoutSummary">
+            <div className="checkoutStep">2</div>
+            <h2 className="checkoutPanelTitle">Order summary</h2>
 
-          {items.length ? (
-            <div
-              className="grid"
-              style={{
-                gridTemplateColumns: "1fr",
-                gap: 10,
-              }}
-            >
-              {items.map((it) => (
-                <div
-                  key={it.key}
-                  className="card"
-                  style={{
-                    padding: 12,
-                    display: "flex",
-                    gap: 12,
-                    alignItems: "center",
-                  }}
-                >
-                  <div
-                    style={{
-                      width: 56,
-                      height: 56,
-                      borderRadius: 14,
-                      overflow: "hidden",
-                      border: "1px solid var(--line)",
-                    }}
-                  >
-                    <img
-                      src={imageUrl(it.image)}
-                      alt={it.name}
-                      style={{
-                        width: "100%",
-                        height: "100%",
-                        objectFit: "cover",
-                      }}
-                    />
-                  </div>
+            <div className="hr" />
 
-                  <div style={{ flex: 1 }}>
-                    <div style={{ fontWeight: 900 }}>
-                      {it.name}
+            {items.length ? (
+              <div className="checkoutItems">
+                {items.map((it) => (
+                  <div key={it.key} className="checkoutItem">
+                    <div className="checkoutThumb">
+                      <img src={imageUrl(it.image)} alt={it.name} />
                     </div>
 
-                    <div className="small">
-                      {it.qty} × {money(it.price)} •{" "}
-                      {it.size} • {it.color}
+                    <div className="checkoutItemMain">
+                      <div className="checkoutItemName">{it.name}</div>
+                      <div className="small">
+                        {it.qty} x {money(it.price)} / {it.size} / {it.color}
+                      </div>
                     </div>
+
+                    <div className="price">{money(it.qty * it.price)}</div>
                   </div>
+                ))}
+              </div>
+            ) : (
+              <div className="checkoutEmpty">
+                <div className="small">Your cart is empty.</div>
+                <Link className="btn primary" to="/shop">Back to shop</Link>
+              </div>
+            )}
 
-                  <div className="price">
-                    {money(it.qty * it.price)}
-                  </div>
-                </div>
-              ))}
+            <div className="hr" />
+
+            <div className="space">
+              <div className="small">Subtotal</div>
+              <div className="price">{money(subtotal)}</div>
             </div>
-          ) : (
-            <div className="small">
-              Empty cart.
-            </div>
-          )}
 
-          <div className="hr" />
-
-          <div className="space">
-            <div className="small">Subtotal</div>
-
-            <div className="price">
-              {money(subtotal)}
+            <div className="checkoutFineprint">
+              Delivery fee, if required, can be confirmed with the seller after payment.
             </div>
           </div>
         </div>

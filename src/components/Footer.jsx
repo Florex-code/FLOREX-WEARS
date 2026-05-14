@@ -22,8 +22,8 @@ export default function Footer() {
             Designed in Lagos, worn worldwide.
           </p>
           <div className="footerContact">
-            <span>📍 Demo store (no real payments)</span>
-            <span>✉️ admin@florexwears.com</span>
+            <span>Lagos, Nigeria</span>
+            <span>florexstudio.ng@gmail.com</span>
           </div>
         </div>
 
@@ -75,7 +75,7 @@ export default function Footer() {
             <Link to="/terms">Terms</Link>
             <Link to="/cookies">Cookies</Link>
           </div>
-          <div className="footerTech">React + Vite • Local demo backend</div>
+          <div className="footerTech">Secure checkout / Curated fashion</div>
         </div>
       </div>
     </footer>

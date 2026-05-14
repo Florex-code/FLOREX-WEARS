@@ -8,6 +8,7 @@ export default function Login() {
   const [mode, setMode] = React.useState("login");
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
+  const [showPassword, setShowPassword] = React.useState(false);
   const [loading, setLoading] = React.useState(false);
   const [message, setMessage] = React.useState("");
 
@@ -42,7 +43,7 @@ export default function Login() {
       return;
     }
 
-    navigate("/admin");
+    navigate("/account");
   }
 
   return (
@@ -64,14 +65,24 @@ export default function Login() {
             required
           />
 
-          <input
-            type="password"
-            placeholder="Password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-            minLength={6}
-          />
+          <div className="passwordField">
+            <input
+              type={showPassword ? "text" : "password"}
+              placeholder="Password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+              minLength={6}
+            />
+            <button
+              type="button"
+              className="passwordToggle"
+              onClick={() => setShowPassword((value) => !value)}
+              aria-label={showPassword ? "Hide password" : "Show password"}
+            >
+              {showPassword ? "Hide" : "Show"}
+            </button>
+          </div>
 
           <button className="btn primary" disabled={loading}>
             {loading
@@ -95,7 +106,7 @@ export default function Login() {
         </button>
 
         <Link to="/" className="authBack">
-          ← Back home
+          Back home
         </Link>
       </div>
     </div>

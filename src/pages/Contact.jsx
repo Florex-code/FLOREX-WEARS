@@ -18,8 +18,8 @@ export default function Contact(){
     <div className="container section">
       <div className="grid" style={{gridTemplateColumns:"1.05fr .95fr", gap:16}}>
         <div className="card" style={{padding:18}}>
-          <div className="badge">📩 Contact</div>
-          <h1 className="h2" style={{margin:"12px 0 8px"}}>Let’s talk</h1>
+          <div className="badge">Contact</div>
+          <h1 className="h2" style={{margin:"12px 0 8px"}}>Let's talk</h1>
           <form onSubmit={send}>
             <div className="small">Name</div>
             <input className="input" value={name} onChange={(e)=>setName(e.target.value)} />
@@ -31,7 +31,7 @@ export default function Contact(){
             <textarea className="textarea" rows="5" value={msg} onChange={(e)=>setMsg(e.target.value)} />
             <div className="row" style={{marginTop:14}}>
               <button className="btn primary" type="submit">Send</button>
-              <span className="badge">Demo form</span>
+              <span className="badge">Style help, orders, sizing</span>
             </div>
           </form>
         </div>
@@ -48,7 +48,7 @@ export default function Contact(){
   rel="noreferrer"
   className="btn whatsapp-btn"
 >
-  💬 Chat on WhatsApp
+  Chat on WhatsApp
 </a>
         </div>
       </div>

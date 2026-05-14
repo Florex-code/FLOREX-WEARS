@@ -26,7 +26,7 @@ export default function CartDrawer(){
             <div style={{fontWeight:900,letterSpacing:"-0.02em"}}>Your Cart</div>
             <div className="small">{items.length ? "Ready when you are." : "Empty cart. Let's fix that."}</div>
           </div>
-          <button className="btn ghost" onClick={close} aria-label="Close cart">✕</button>
+          <button className="btn ghost" onClick={close} aria-label="Close cart">×</button>
         </div>
 
         <div className="drawerBody">
@@ -37,7 +37,7 @@ export default function CartDrawer(){
                   <div className="drawerThumb"><img src={imageUrl(it.image)} alt={it.name} onError={(e)=>{e.currentTarget.style.opacity=.55}}/></div>
                   <div>
                     <div className="drawerName">{it.name}</div>
-                    <div className="small">Size: <b>{it.size}</b> • Color: <b>{it.color}</b></div>
+                    <div className="small">Size: <b>{it.size}</b> / Color: <b>{it.color}</b></div>
 
                     <div className="space" style={{marginTop:8}}>
                       <div className="price">{money(it.price * it.qty)}</div>
@@ -57,7 +57,7 @@ export default function CartDrawer(){
             </div>
           ) : (
             <div className="drawerEmpty">
-              <div className="drawerEmptyIcon">🧺</div>
+              <div className="drawerEmptyIcon">0</div>
               <div style={{fontWeight:900}}>Your cart is empty</div>
               <div className="small">Go to the shop and pick a few pieces.</div>
               <Link className="btn primary" to="/shop" onClick={close}>Browse Shop</Link>

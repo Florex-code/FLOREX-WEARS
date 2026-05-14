@@ -21,7 +21,7 @@ export const seedProducts = [
     "badge": "New",
     "desc": "Breathable knit polo with structure and clean drape. Easy to style.",
     "images": [
-      "/images/miles.jpg"
+      "/images/Aurora Knit Polo.jpg"
     ]
   },
   {
@@ -46,7 +46,7 @@ export const seedProducts = [
     "badge": "Best Seller",
     "desc": "Heavyweight hoodie, sharp silhouette, premium feel. Built for everyday dominance.",
     "images": [
-      "/images/wedding.jpg"
+      "/images/Vanta Street Hoodie.jpg"
     ]
   },
   {
@@ -71,7 +71,7 @@ export const seedProducts = [
     "badge": "Limited",
     "desc": "Smooth satin finish with a subtle shine. Perfect for nights out.",
     "images": [
-      "/images/satin.svg"
+      "/images/Satin Drift Shirt.jpg"
     ]
   },
   {
@@ -95,7 +95,7 @@ export const seedProducts = [
     "badge": "Trending",
     "desc": "High waist, wide leg, minimal look. Designed for clean presence.",
     "images": [
-      "/images/trousers.svg"
+      "/images/Wide-Leg-Trousers.jpg"
     ]
   },
   {
@@ -121,7 +121,7 @@ export const seedProducts = [
     "badge": "Essential",
     "desc": "Soft tee with neat neckline. Clean look with zero effort.",
     "images": [
-      "/images/tee.svg"
+      "/images/Cloudline-Tee.jpg"
     ]
   },
   {
@@ -144,7 +144,7 @@ export const seedProducts = [
     "badge": "New",
     "desc": "Dark wash denim jacket with sharp seams. Goes with everything.",
     "images": [
-      "/images/denim.svg"
+      "/images/Obsidian-Denim-Jacket.jpg"
     ]
   }
 ];

@@ -45,9 +45,9 @@ export default function Product(){
         </div>
 
         <div className="card" style={{padding:18}}>
-          <div className="badge">{p.badge} • ⭐ {Number(p.rating||0).toFixed(1)}</div>
+          <div className="badge">{p.badge} / ★ {Number(p.rating||0).toFixed(1)}</div>
           <h1 className="h2" style={{margin:"10px 0 8px"}}>{p.name}</h1>
-          <div className="small">{p.category} • {p.style} • {p.gender}</div>
+          <div className="small">{p.category} / {p.style} / {p.gender}</div>
 
           <div className="hr" />
 
@@ -76,7 +76,7 @@ export default function Product(){
           <div className="row" style={{marginTop:12}}>
             <div style={{width:120}}>
               <div className="small">Qty</div>
-              <input className="input" value={qty} onChange={(e)=>setQty(e.target.value)} />
+              <input className="input" type="number" min="1" value={qty} onChange={(e)=>setQty(e.target.value)} />
             </div>
             <button className="btn primary right" onClick={() => { add(p, { qty, size, color }); toast.push("Added to cart", "good"); }}>
               Add to cart
@@ -84,7 +84,7 @@ export default function Product(){
           </div>
 
           <div className="hr" />
-          <div className="small">Shipping: <b>1–3 days</b> in Lagos (demo). Returns: <b>7 days</b> (demo policy).</div>
+          <div className="small">Shipping: <b>1-3 days</b> in Lagos. Returns: <b>7 days</b> after delivery.</div>
         </div>
       </div>
     </div>

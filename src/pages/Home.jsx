@@ -31,13 +31,12 @@ export default function Home() {
       <section className="hero">
         <div className="container heroGrid">
           <div className="heroCard">
-            <div className="heroBadge">✨ New Season • Balanced colors • Premium UI</div>
+            <div className="heroBadge">New season / Lagos-ready pieces / Limited drops</div>
             <h1 className="heroTitle">
               Dress like the <span className="heroTitleAccent">decision</span> is already made.
             </h1>
             <p className="heroDesc">
-              FLOREX-WEARS is a premium clothing store. 
-              It possesses a clean layout, fast pages, smooth UX, and protected checkout.
+              Clean streetwear and smart casual essentials with sharp silhouettes, rich textures, and easy outfit confidence.
             </p>
             <div className="heroActions">
               <Link className="btn primary heroCta" to="/shop">Shop Collection</Link>
@@ -48,16 +47,16 @@ export default function Home() {
             </div>
             <div className="heroFeatures">
               <div className="heroFeature">
-                <div className="heroFeatureTitle">⚡ Fast</div>
-                <div className="heroFeatureDesc">Vite powered builds and snappy routing</div>
+                <div className="heroFeatureTitle">Fresh Drops</div>
+                <div className="heroFeatureDesc">Pieces selected for standout everyday styling</div>
               </div>
               <div className="heroFeature">
-                <div className="heroFeatureTitle">🔒 Secure UX</div>
-                <div className="heroFeatureDesc">Protected checkout and admin-only dashboard</div>
+                <div className="heroFeatureTitle">Secure Checkout</div>
+                <div className="heroFeatureDesc">Protected order flow with Paystack payment</div>
               </div>
               <div className="heroFeature">
-                <div className="heroFeatureTitle">✨ Premium UI</div>
-                <div className="heroFeatureDesc">Balanced colors, cards, drawer cart, toasts</div>
+                <div className="heroFeatureTitle">Lagos Delivery</div>
+                <div className="heroFeatureDesc">Fast local delivery and clear order details</div>
               </div>
             </div>
           </div>
@@ -118,8 +117,11 @@ export default function Home() {
       <section className="featuredSection">
         <div className="container">
           <div className="featuredHeader">
-            <h2 className="featuredTitle">Featured Pieces</h2>
-            <Link className="featuredLink" to="/shop">View all →</Link>
+            <div>
+              <h2 className="featuredTitle">Featured Pieces</h2>
+              <p className="sectionIntro">Customer favorites that work from daytime plans to night moves.</p>
+            </div>
+            <Link className="featuredLink" to="/shop">View all &gt;</Link>
           </div>
           <div className="featuredGrid">
             {featured.map(p => (
@@ -227,7 +229,7 @@ export default function Home() {
             </div>
             <div className="quickViewContent">
               <div className="badge quickViewBadge">
-                {quick.badge} • <span className="quickViewRating">⭐ {Number(quick.rating || 0).toFixed(1)}</span>
+                {quick.badge} / <span className="quickViewRating">★ {Number(quick.rating || 0).toFixed(1)}</span>
               </div>
               <p className="quickViewDesc">{quick.desc}</p>
               <div className="quickViewMeta">
@@ -248,7 +250,7 @@ export default function Home() {
                   <span className="quickViewMetaValue">{quick.sizes?.join(", ")}</span>
                 </div>
               </div>
-              <div className="quickViewPrice">₦{quick.price?.toLocaleString()}</div>
+              <div className="quickViewPrice">{"\u20a6"}{quick.price?.toLocaleString()}</div>
             </div>
           </div>
         ) : null}

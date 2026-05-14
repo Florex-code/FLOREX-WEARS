@@ -25,7 +25,7 @@ export default function SearchModal({ open, onClose }){
       onClose={onClose}
       footer={<div className="small">Tip: press <span className="kbd">Esc</span> to close.</div>}
     >
-      <input className="input" placeholder="Search products…" value={q} autoFocus onChange={(e)=>setQ(e.target.value)} />
+      <input className="input" placeholder="Search products..." value={q} autoFocus onChange={(e)=>setQ(e.target.value)} />
       <div className="hr" />
       {!q.trim() ? <div className="small">Start typing to search.</div> : results.length ? (
         <div className="grid" style={{ gridTemplateColumns: "1fr", gap: 10 }}>
@@ -42,7 +42,7 @@ export default function SearchModal({ open, onClose }){
               </div>
               <div style={{ flex: 1 }}>
                 <div style={{ fontWeight: 900 }}>{p.name}</div>
-                <div className="small">{p.category} • {p.style}</div>
+                <div className="small">{p.category} / {p.style}</div>
               </div>
               <div className="kbd">Open</div>
             </Link>

@@ -22,6 +22,17 @@ body{
 a{color:inherit;text-decoration:none}
 button,input,select,textarea{font:inherit}
 img{max-width:100%;display:block}
+button:disabled{opacity:.6;cursor:not-allowed;transform:none !important;}
+.whatsapp-float{
+  position:fixed;right:18px;bottom:18px;z-index:9995;
+  min-width:58px;height:48px;padding:0 16px;border-radius:999px;
+  display:inline-flex;align-items:center;justify-content:center;
+  color:white;font-weight:900;font-size:14px;
+  background:linear-gradient(135deg,#16a34a,#0f766e);
+  box-shadow:0 16px 36px rgba(0,0,0,.28);
+  border:1px solid rgba(255,255,255,.18);
+}
+.whatsapp-float:hover{filter:brightness(1.05);transform:translateY(-1px);}
 .container{max-width:var(--container);margin:0 auto;padding:0 18px;}
 .section{padding:34px 0;}
 .card{
@@ -77,5 +88,9 @@ img{max-width:100%;display:block}
 .wrap{flex-wrap:wrap;}
 .right{margin-left:auto;}
 @media(max-width:880px){.hide-sm{display:none !important;}}
+@media(max-width:520px){
+  .btn{border-radius:12px;padding:10px 12px;}
+  .whatsapp-float{right:14px;bottom:14px;height:44px;min-width:54px;font-size:13px;}
+}
 @keyframes pop{from{transform:translateY(8px);opacity:0}to{transform:translateY(0);opacity:1}}
 @keyframes slideInRight{from{transform:translateX(24px);opacity:0}to{transform:translateX(0);opacity:1}}

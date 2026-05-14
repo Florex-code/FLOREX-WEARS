@@ -39,27 +39,27 @@ export default function Navbar({ onOpenSearch }) {
         </nav>
 
         <div className="navActions">
-          <button className="btn ghost navDesktopOnly" onClick={onOpenSearch}>🔎 Search</button>
+          <button className="btn ghost navDesktopOnly" onClick={onOpenSearch}>Search</button>
           <button className="btn ghost navDesktopOnly" onClick={toggleTheme}>
-            {theme === "dark" ? "🌙 Dark" : "☀️ Light"}
+            {theme === "dark" ? "Dark" : "Light"}
           </button>
 
           <button className="btn primary" onClick={toggle}>
-            🛒 <span className="navDesktopOnly">Cart</span> <span className="navPill">{count}</span>
+            <span className="navDesktopOnly">Cart</span> <span className="navPill">{count}</span>
           </button>
            
            {user ? (
   <button className="btn ghost navDesktopOnly" onClick={handleLogout}>
-    ⊘ Logout
+    Logout
   </button>
 ) : (
   <button className="btn ghost navDesktopOnly" onClick={() => nav("/auth")}>
-    🔐 Login
+    Login
   </button>
 )}
 
           <button className="hamburgerBtn" onClick={() => setMenuOpen(!menuOpen)}>
-            ☰
+            {menuOpen ? "×" : "☰"}
           </button>
         </div>
       </div>
@@ -73,18 +73,18 @@ export default function Navbar({ onOpenSearch }) {
 
           {isAdmin && <NavLink to="/admin" onClick={closeMenu}>Admin</NavLink>}
 
-          <button onClick={() => { onOpenSearch(); closeMenu(); }}>🔎 Search</button>
+          <button onClick={() => { onOpenSearch(); closeMenu(); }}>Search</button>
           <button onClick={() => { toggleTheme(); closeMenu(); }}>
-            {theme === "dark" ? "🌙 Dark mode" : "☀️ Light mode"}
+            {theme === "dark" ? "Dark mode" : "Light mode"}
           </button>
 
           {user ? (
             <>
-              <NavLink to="/account" onClick={closeMenu}>👤 Account</NavLink>
-              <button onClick={handleLogout}>⊘ Logout</button>
+              <NavLink to="/account" onClick={closeMenu}>Account</NavLink>
+              <button onClick={handleLogout}>Logout</button>
             </>
           ) : (
-            <NavLink to="/auth" onClick={closeMenu}>🔐 Login</NavLink>
+            <NavLink to="/auth" onClick={closeMenu}>Login</NavLink>
           )}
         </div>
       )}

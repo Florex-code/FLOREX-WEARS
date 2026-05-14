@@ -8,7 +8,7 @@
 }
 
 .navBar {
-  padding: 12px 0;
+  padding: 12px 18px;
   display: flex;
   gap: 12px;
   align-items: center;
@@ -22,6 +22,7 @@
   background: transparent;
   cursor: pointer;
   color: var(--text);
+  min-width: 0;
 }
 
 .navMark {
@@ -72,6 +73,7 @@
   gap: 10px;
   margin-left: auto;
   align-items: center;
+  min-width: 0;
 }
 
 .navPill {
@@ -111,7 +113,7 @@
 @media (max-width: 768px) {
 
   .navBar {
-    padding: 10px 0;
+    padding: 10px 14px;
   }
 
   .navTag,
@@ -122,6 +124,10 @@
 
   .navName {
     font-size: 14px;
+    max-width: 150px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 
   .hamburgerBtn {
@@ -134,8 +140,8 @@
     position: absolute;
     top: 72px;
     right: 14px;
-
-    width: 230px;
+    left: 14px;
+    width: auto;
 
     display: flex;
     flex-direction: column;
@@ -186,6 +192,13 @@
       var(--brand) 12%,
       transparent);
   }
+}
+
+@media (max-width: 390px) {
+  .navName { max-width: 116px; }
+  .navActions { gap: 6px; }
+  .hamburgerBtn { width: 42px; height: 42px; }
+  .navPill { min-width: 24px; }
 }
 
 @keyframes menuIn {

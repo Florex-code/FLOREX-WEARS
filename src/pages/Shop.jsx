@@ -71,7 +71,7 @@ export default function Shop() {
           <div className="shopHeaderTop">
             <div>
               <h1 className="shopTitle">Shop</h1>
-              <p className="shopSubtitle">Filter, search, and add to cart. Demo store, but real UX.</p>
+              <p className="shopSubtitle">Find the right piece fast, compare styles, and build your cart with confidence.</p>
             </div>
             <span className="shopCount">{filtered.length} items</span>
           </div>
@@ -83,7 +83,7 @@ export default function Shop() {
             <div className="filterGroup">
               <label className="filterLabel">Search</label>
               <div className="filterSearch">
-                <span className="filterSearchIcon">🔍</span>
+                <span className="filterSearchIcon">⌕</span>
                 <input 
                   className="filterInput" 
                   placeholder="Search products..." 
@@ -131,13 +131,13 @@ export default function Shop() {
                 className={`sortButton ${sort === "price_asc" ? "active" : ""}`} 
                 onClick={() => setSort("price_asc")}
               >
-                Price ↑
+                Price low
               </button>
               <button 
                 className={`sortButton ${sort === "price_desc" ? "active" : ""}`} 
                 onClick={() => setSort("price_desc")}
               >
-                Price ↓
+                Price high
               </button>
             </div>
             <button className="sortReset" onClick={resetFilters}>Reset Filters</button>
@@ -158,7 +158,7 @@ export default function Shop() {
           </div>
         ) : (
           <div className="emptyState">
-            <div className="emptyIcon">📦</div>
+            <div className="emptyIcon">0</div>
             <h3 className="emptyTitle">No products found</h3>
             <p className="emptyText">Try adjusting your filters or search query</p>
           </div>
@@ -184,13 +184,13 @@ export default function Shop() {
             </div>
             <div className="quickViewContent">
               <div className="badge quickViewBadge">
-                {quick.category} • {quick.style} • {quick.gender}
+                {quick.category} / {quick.style} / {quick.gender}
               </div>
               <p className="quickViewDesc">{quick.desc}</p>
               <div className="quickViewMeta">
                 <div className="quickViewMetaItem">
                   <span className="quickViewMetaLabel">Rating</span>
-                  <span className="quickViewMetaValue">⭐ {Number(quick.rating || 0).toFixed(1)}</span>
+                  <span className="quickViewMetaValue">★ {Number(quick.rating || 0).toFixed(1)}</span>
                 </div>
                 <div className="quickViewMetaItem">
                   <span className="quickViewMetaLabel">Sizes</span>
@@ -201,7 +201,7 @@ export default function Shop() {
                   <span className="quickViewMetaValue">{quick.colors?.join(", ")}</span>
                 </div>
               </div>
-              <div className="quickViewPrice">₦{quick.price?.toLocaleString()}</div>
+              <div className="quickViewPrice">{"\u20a6"}{quick.price?.toLocaleString()}</div>
             </div>
           </div>
         ) : null}
