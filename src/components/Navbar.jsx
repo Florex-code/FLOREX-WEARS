@@ -22,13 +22,14 @@ export default function Navbar({ onOpenSearch }) {
   const closeMenu = () => setMenuOpen(false);
 
   return (
-    <header className="navWrap">
-      <div className="container navBar">
-        <button className="navLogo" onClick={() => nav("/")}>
-          <span className="navMark">A</span>
-          <span className="navName">Avenoir</span>
-          <span className="navTag">quiet luxury / modern essentials</span>
-        </button>
+    <>
+      <header className="navWrap">
+        <div className="announceBar">New pieces added weekly / Secure checkout on every order</div>
+        <div className="container navBar">
+          <button className="navLogo" onClick={() => nav("/")}>
+            <span className="navName">Avenoir</span>
+            <span className="navTag">modern essentials</span>
+          </button>
 
         <nav className="navLinks">
           <NavLink to="/" className={({ isActive }) => "navLink " + (isActive ? "active" : "")}>Home</NavLink>
@@ -39,12 +40,14 @@ export default function Navbar({ onOpenSearch }) {
         </nav>
 
         <div className="navActions">
-          <button className="btn ghost navDesktopOnly" onClick={onOpenSearch}>Search</button>
+          <button className="navIconBtn" aria-label="Search" onClick={onOpenSearch}>
+            <span className="navIconText">Search</span>
+          </button>
           <button className="btn ghost navDesktopOnly" onClick={toggleTheme}>
             {theme === "dark" ? "Dark" : "Light"}
           </button>
 
-          <button className="btn primary" onClick={toggle}>
+          <button className="navCartBtn" onClick={toggle} aria-label={`Cart with ${count} items`}>
             <span className="navDesktopOnly">Cart</span> <span className="navPill">{count}</span>
           </button>
            
@@ -88,6 +91,16 @@ export default function Navbar({ onOpenSearch }) {
           )}
         </div>
       )}
-    </header>
+
+      </header>
+
+      <nav className="mobileBottomNav" aria-label="Mobile shortcuts">
+        <NavLink to="/" onClick={closeMenu}>Home</NavLink>
+        <NavLink to="/shop" onClick={closeMenu}>Shop</NavLink>
+        <button onClick={() => { onOpenSearch(); closeMenu(); }}>Search</button>
+        <button onClick={() => { toggle(); closeMenu(); }}>Cart {count}</button>
+        <NavLink to={user ? "/account" : "/auth"} onClick={closeMenu}>{user ? "Account" : "Login"}</NavLink>
+      </nav>
+    </>
   );
 }

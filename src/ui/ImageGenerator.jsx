@@ -37,7 +37,7 @@ export default function ImageGenerator({ onImageGenerated, defaultPrompt = '' })
   };
 
   const presetPrompts = [
-    "Premium navy blue hoodie, streetwear style, on white background, product photography, studio lighting, high quality fashion photo",
+    "Navy blue hoodie, streetwear style, on white background, product photography, studio lighting, high quality fashion photo",
     "Elegant satin shirt, champagne color, luxury menswear, flat lay photography, minimal background, professional product shot",
     "Wide leg trousers, stone color, women's fashion, model wearing, clean background, editorial style photography",
     "Knit polo shirt, midnight blue, smart casual, folded neatly, white background, ecommerce product photo",
@@ -60,7 +60,7 @@ export default function ImageGenerator({ onImageGenerated, defaultPrompt = '' })
           <textarea
             value={prompt}
             onChange={(e) => setPrompt(e.target.value)}
-            placeholder="e.g., Premium navy hoodie, streetwear style, on white background..."
+            placeholder="e.g., Navy hoodie, streetwear style, on white background..."
             rows={3}
           />
           

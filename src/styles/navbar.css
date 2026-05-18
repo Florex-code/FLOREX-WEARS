@@ -124,7 +124,7 @@
 
   .navName {
     font-size: 14px;
-    max-width: 150px;
+    max-width: 132px;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -138,25 +138,25 @@
 
   .mobileMenu {
     position: absolute;
-    top: 72px;
+    top: 68px;
     right: 14px;
-    left: 14px;
-    width: auto;
+    left: auto;
+    width: min(265px, calc(100vw - 28px));
 
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 2px;
 
-    padding: 12px;
+    padding: 8px;
 
-    border-radius: 24px;
+    border-radius: 8px;
 
-    background: color-mix(in oklab, var(--card) 94%, black);
+    background: color-mix(in oklab, var(--card) 96%, black);
 
     border: 1px solid var(--line);
 
     box-shadow:
-      0 20px 60px rgba(0,0,0,.45);
+      0 18px 42px rgba(0,0,0,.36);
 
     backdrop-filter: blur(20px);
 
@@ -173,12 +173,14 @@
 
     padding: 13px 14px;
 
-    border-radius: 14px;
+    border-radius: 6px;
 
     text-align: left;
 
-    font-size: 15px;
-    font-weight: 600;
+    font-size: 13px;
+    font-weight: 800;
+    letter-spacing: .05em;
+    text-transform: uppercase;
 
     cursor: pointer;
 
@@ -210,4 +212,192 @@
     opacity: 1;
     transform: translateY(0) scale(1);
   }
+}
+
+/* Fashion retail header */
+.announceBar {
+  min-height: 32px;
+  display: grid;
+  place-items: center;
+  padding: 7px 12px;
+  background: var(--text);
+  color: var(--bg);
+  font-size: 11px;
+  font-weight: 850;
+  letter-spacing: .08em;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.navWrap {
+  background: color-mix(in oklab, var(--bg) 94%, transparent);
+  backdrop-filter: blur(14px);
+}
+
+.navBar {
+  padding: 14px 18px;
+}
+
+.navName {
+  font-weight: 900;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+
+.navLink {
+  border-radius: 0;
+  font-size: 13px;
+  font-weight: 750;
+  text-transform: uppercase;
+  letter-spacing: .04em;
+}
+
+.navIconBtn,
+.navCartBtn {
+  min-height: 40px;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  background: transparent;
+  color: var(--text);
+  padding: 9px 12px;
+  cursor: pointer;
+  font-weight: 800;
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: .05em;
+}
+
+.navCartBtn {
+  display: inline-flex;
+  align-items: center;
+}
+
+.hamburgerBtn {
+  border-radius: 4px;
+  min-width: 46px;
+  height: 42px;
+  padding: 0 10px;
+  font-size: 12px;
+  font-weight: 850;
+  text-transform: uppercase;
+}
+
+.mobileBottomNav {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  body {
+    padding-bottom: 58px;
+  }
+
+  .announceBar {
+    min-height: 30px;
+    font-size: 10px;
+    white-space: nowrap;
+    overflow: hidden;
+  }
+
+  .navIconText {
+    display: none;
+  }
+
+  .navIconBtn {
+    width: 42px;
+    padding: 0;
+    position: relative;
+  }
+
+  .navIconBtn::before {
+    content: "";
+    width: 15px;
+    height: 15px;
+    border: 2px solid currentColor;
+    border-radius: 999px;
+    display: block;
+    margin: 0 auto;
+  }
+
+  .navIconBtn::after {
+    content: "";
+    position: absolute;
+    width: 8px;
+    height: 2px;
+    background: currentColor;
+    transform: rotate(45deg);
+    left: 25px;
+    top: 25px;
+  }
+
+  .navCartBtn {
+    min-width: 42px;
+    padding: 0 8px;
+  }
+
+  .navActions {
+    gap: 7px;
+  }
+
+  .mobileMenu {
+    top: 88px;
+    border-radius: 8px;
+  }
+
+  .mobileMenu a,
+  .mobileMenu button {
+    border-radius: 6px;
+  }
+
+  .mobileBottomNav {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 9998;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    min-height: 58px;
+    padding-bottom: env(safe-area-inset-bottom);
+    border-top: 1px solid var(--line);
+    background: color-mix(in oklab, var(--bg) 96%, transparent);
+    backdrop-filter: blur(16px);
+  }
+
+  .mobileBottomNav a,
+  .mobileBottomNav button {
+    display: grid;
+    place-items: center;
+    border: 0;
+    border-right: 1px solid var(--line);
+    background: transparent;
+    color: var(--muted);
+    font-size: 11px;
+    font-weight: 850;
+    text-transform: uppercase;
+    letter-spacing: .04em;
+  }
+
+  .mobileBottomNav a.active {
+    color: var(--text);
+    background: color-mix(in oklab, var(--card) 70%, transparent);
+  }
+}
+
+[data-theme="light"] .navWrap,
+[data-theme="light"] .mobileBottomNav {
+  background: rgba(251,250,247,.96);
+}
+
+[data-theme="light"] .navLink,
+[data-theme="light"] .mobileMenu a,
+[data-theme="light"] .mobileMenu button,
+[data-theme="light"] .mobileBottomNav a,
+[data-theme="light"] .mobileBottomNav button {
+  color: rgba(18,16,13,.76);
+}
+
+[data-theme="light"] .navLink.active,
+[data-theme="light"] .navLink:hover,
+[data-theme="light"] .mobileBottomNav a.active {
+  color: #12100d;
 }

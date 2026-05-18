@@ -521,7 +521,7 @@ export default function Admin() {
                   <button
   className="btn ghost"
   onClick={async () => {
-    await deleteOrder(order.id);
+    await deleteOrder(o.id);
     loadOrders();
   }}
 >

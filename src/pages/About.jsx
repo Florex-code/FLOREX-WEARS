@@ -13,8 +13,8 @@ export default function About() {
   const values = [
     {
       icon: "✦",
-      title: "Premium Quality",
-      desc: "Every piece is crafted with attention to detail using the finest materials sourced from ethical suppliers."
+      title: "Quality Craft",
+      desc: "Every piece is crafted with attention to detail using carefully selected materials from ethical suppliers."
     },
     {
       icon: "◈",

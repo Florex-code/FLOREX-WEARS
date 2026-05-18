@@ -14,8 +14,37 @@ export default function Checkout() {
 
   const [name, setName] = React.useState("");
   const [phone, setPhone] = React.useState("");
+  const [city, setCity] = React.useState("");
   const [address, setAddress] = React.useState("");
+  const [deliveryMethod, setDeliveryMethod] = React.useState("standard");
+  const [note, setNote] = React.useState("");
   const [loading, setLoading] = React.useState(false);
+
+  const deliveryOptions = [
+    {
+      id: "standard",
+      title: "Standard dispatch",
+      meta: "1-3 business days after confirmation",
+      price: 0,
+    },
+    {
+      id: "payment_on_delivery",
+      title: "Payment on delivery",
+      meta: "Pay when your order arrives",
+      price: 0,
+    },
+  ];
+
+  const selectedDelivery = deliveryOptions.find((option) => option.id === deliveryMethod) || deliveryOptions[0];
+  const orderTotal = subtotal + selectedDelivery.price;
+  const detailProgress = [name, phone, city, address].filter((value) => value.trim()).length;
+  const isDetailsComplete = detailProgress === 4;
+  const savedAddress = [
+    address.trim(),
+    city.trim() ? `City/area: ${city.trim()}` : "",
+    `Delivery: ${selectedDelivery.title}`,
+    note.trim() ? `Note: ${note.trim()}` : "",
+  ].filter(Boolean).join("\n");
 
   React.useEffect(() => {
     const script = document.createElement("script");
@@ -28,7 +57,7 @@ export default function Checkout() {
     };
   }, []);
 
-  async function savePaidOrder(reference) {
+  async function saveOrder(reference, status = "paid") {
     const orderItems = items.map((it) => ({
       product_id: it.id,
       name: it.name,
@@ -43,10 +72,10 @@ export default function Checkout() {
       user_email: user.email,
       full_name: name.trim(),
       phone: phone.trim(),
-      address: address.trim(),
+      address: savedAddress,
       items: orderItems,
-      total: subtotal,
-      status: "paid",
+      total: orderTotal,
+      status,
       payment_reference: reference,
     });
 
@@ -54,12 +83,12 @@ export default function Checkout() {
 
     if (error) {
       console.error(error);
-      toast.push("Payment succeeded but order save failed.", "bad");
+      toast.push(status === "paid" ? "Payment succeeded but order save failed." : "Could not place order.", "bad");
       return;
     }
 
     clear();
-    toast.push("Payment successful. Your order is confirmed.", "good");
+    toast.push(status === "paid" ? "Payment successful. Your order is confirmed." : "Order placed. You can pay on delivery.", "good");
 
     setTimeout(() => {
       window.location.href = "/";
@@ -74,13 +103,19 @@ export default function Checkout() {
       return;
     }
 
-    if (!name.trim() || !phone.trim() || !address.trim()) {
+    if (!name.trim() || !phone.trim() || !city.trim() || !address.trim()) {
       toast.push("Please fill delivery details.", "bad");
       return;
     }
 
     if (!user?.email) {
       toast.push("Please login first.", "bad");
+      return;
+    }
+
+    if (deliveryMethod === "payment_on_delivery") {
+      setLoading(true);
+      saveOrder("POD_" + Date.now(), "payment_on_delivery");
       return;
     }
 
@@ -101,12 +136,12 @@ export default function Checkout() {
     const handler = window.PaystackPop.setup({
       key: publicKey,
       email: user.email,
-      amount: Number(subtotal) * 100,
+      amount: Number(orderTotal) * 100,
       currency: "NGN",
       ref: "AVN_" + Date.now(),
 
       callback: function (response) {
-        savePaidOrder(response.reference);
+        saveOrder(response.reference, "paid");
       },
 
       onClose: function () {
@@ -126,56 +161,130 @@ export default function Checkout() {
             <div className="badge">Secure checkout</div>
             <h1 className="h2 checkoutTitle">Complete your order</h1>
             <p className="p checkoutCopy">
-              Confirm your delivery details, review your pieces, and pay safely with Paystack.
+              Add your contact and delivery preferences, review your pieces, and pay safely with Paystack.
             </p>
           </div>
           <div className="checkoutTrust">
             <span>Protected payment</span>
             <span>Order confirmation</span>
-            <span>Lagos delivery</span>
+            <span>Fast dispatch</span>
           </div>
         </div>
 
         <div className="checkoutGrid">
           <div className="card checkoutPanel">
-            <div className="checkoutStep">1</div>
-            <h2 className="checkoutPanelTitle">Delivery details</h2>
+            <div className="checkoutPanelHeader">
+              <div>
+                <div className="checkoutStep">Step 1</div>
+                <h2 className="checkoutPanelTitle">Delivery details</h2>
+              </div>
+              <div className={`checkoutProgress ${isDetailsComplete ? "complete" : ""}`}>
+                {detailProgress}/4 complete
+              </div>
+            </div>
 
             <form onSubmit={pay} className="checkoutForm">
-              <label className="fieldLabel" htmlFor="checkout-name">Full name</label>
-              <input
-                id="checkout-name"
-                className="input"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                placeholder="Enter your full name"
-                autoComplete="name"
-                required
-              />
+              <div className="checkoutFormGrid">
+                <div className="checkoutField">
+                  <label className="fieldLabel" htmlFor="checkout-name">Full name</label>
+                  <input
+                    id="checkout-name"
+                    className="input"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                    placeholder="Enter your full name"
+                    autoComplete="name"
+                    required
+                  />
+                </div>
 
-              <label className="fieldLabel" htmlFor="checkout-phone">Phone</label>
-              <input
-                id="checkout-phone"
-                className="input"
-                value={phone}
-                onChange={(e) => setPhone(e.target.value)}
-                placeholder="+234..."
-                autoComplete="tel"
-                inputMode="tel"
-                required
-              />
+                <div className="checkoutField">
+                  <label className="fieldLabel" htmlFor="checkout-email">Email</label>
+                  <input
+                    id="checkout-email"
+                    className="input"
+                    value={user?.email || ""}
+                    placeholder="Login email"
+                    autoComplete="email"
+                    readOnly
+                  />
+                </div>
 
-              <label className="fieldLabel" htmlFor="checkout-address">Delivery address</label>
-              <textarea
-                id="checkout-address"
-                className="textarea"
-                rows="4"
-                value={address}
-                onChange={(e) => setAddress(e.target.value)}
-                placeholder="House number, street, area, city"
-                autoComplete="street-address"
-                required
-              />
+                <div className="checkoutField">
+                  <label className="fieldLabel" htmlFor="checkout-phone">Phone</label>
+                  <input
+                    id="checkout-phone"
+                    className="input"
+                    value={phone}
+                    onChange={(e) => setPhone(e.target.value)}
+                    placeholder="+234..."
+                    autoComplete="tel"
+                    inputMode="tel"
+                    required
+                  />
+                </div>
+
+                <div className="checkoutField">
+                  <label className="fieldLabel" htmlFor="checkout-city">City / area</label>
+                  <input
+                    id="checkout-city"
+                    className="input"
+                    value={city}
+                    onChange={(e) => setCity(e.target.value)}
+                    placeholder="City or area"
+                    autoComplete="address-level2"
+                    required
+                  />
+                </div>
+              </div>
+
+              <div className="checkoutField">
+                <label className="fieldLabel" htmlFor="checkout-address">Delivery address</label>
+                <textarea
+                  id="checkout-address"
+                  className="textarea"
+                  rows="4"
+                  value={address}
+                  onChange={(e) => setAddress(e.target.value)}
+                  placeholder="House number, street, landmark"
+                  autoComplete="street-address"
+                  required
+                />
+              </div>
+
+              <div className="checkoutField">
+                <div className="fieldLabel">Payment and delivery option</div>
+                <div className="deliveryOptions">
+                  {deliveryOptions.map((option) => (
+                    <label key={option.id} className={`deliveryOption ${deliveryMethod === option.id ? "selected" : ""}`}>
+                      <input
+                        type="radio"
+                        name="deliveryMethod"
+                        value={option.id}
+                        checked={deliveryMethod === option.id}
+                        onChange={(e) => setDeliveryMethod(e.target.value)}
+                      />
+                      <span>
+                        <strong>{option.title}</strong>
+                        <small>{option.meta}</small>
+                      </span>
+                      <b>{option.price ? money(option.price) : "Included"}</b>
+                    </label>
+                  ))}
+                </div>
+              </div>
+
+              <div className="checkoutField">
+                <label className="fieldLabel" htmlFor="checkout-note">Delivery note</label>
+                <textarea
+                  id="checkout-note"
+                  className="textarea"
+                  rows="3"
+                  value={note}
+                  onChange={(e) => setNote(e.target.value)}
+                  placeholder="Optional landmark, preferred call time, or instruction"
+                />
+              </div>
 
               <div className="checkoutActions">
                 <button
@@ -183,18 +292,25 @@ export default function Checkout() {
                   type="submit"
                   disabled={loading}
                 >
-                  {loading ? "Processing..." : "Pay with Paystack"}
+                  {loading ? "Processing..." : deliveryMethod === "payment_on_delivery" ? "Place order" : "Pay with Paystack"}
                 </button>
                 <span className="small checkoutNote">
-                  You will review payment in a secure Paystack window.
+                  {deliveryMethod === "payment_on_delivery"
+                    ? "Your order will be saved now. Payment is collected on delivery."
+                    : "You will review payment in a secure Paystack window."}
                 </span>
               </div>
             </form>
           </div>
 
           <div className="card checkoutPanel checkoutSummary">
-            <div className="checkoutStep">2</div>
-            <h2 className="checkoutPanelTitle">Order summary</h2>
+            <div className="checkoutPanelHeader">
+              <div>
+                <div className="checkoutStep">Step 2</div>
+                <h2 className="checkoutPanelTitle">Order summary</h2>
+              </div>
+              <Link className="checkoutEditLink" to="/shop">Edit cart</Link>
+            </div>
 
             <div className="hr" />
 
@@ -230,9 +346,17 @@ export default function Checkout() {
               <div className="small">Subtotal</div>
               <div className="price">{money(subtotal)}</div>
             </div>
+            <div className="space checkoutSummaryRow">
+              <div className="small">{selectedDelivery.title}</div>
+              <div className="price">{selectedDelivery.price ? money(selectedDelivery.price) : "Included"}</div>
+            </div>
+            <div className="checkoutTotalRow">
+              <div>Total</div>
+              <strong>{money(orderTotal)}</strong>
+            </div>
 
             <div className="checkoutFineprint">
-              Delivery fee, if required, can be confirmed with the seller after payment.
+              You will receive order confirmation after payment. Delivery availability can be confirmed by the seller when needed.
             </div>
           </div>
         </div>

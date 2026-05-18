@@ -44,7 +44,7 @@ export const seedProducts = [
       "XL"
     ],
     "badge": "Best Seller",
-    "desc": "Heavyweight hoodie, sharp silhouette, premium feel. Built for everyday dominance.",
+    "desc": "Heavyweight hoodie with a sharp silhouette and soft hand feel. Built for everyday dominance.",
     "images": [
       "/images/Vanta Street Hoodie.jpg"
     ]

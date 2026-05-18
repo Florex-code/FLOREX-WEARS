@@ -13,7 +13,7 @@ export default function Home() {
   const { add } = useCart();
   const toast = useToast();
 
-  const featured = products.slice(0, 4);
+  const featured = products.slice(0, 8);
   const [quick, setQuick] = React.useState(null);
 
   // Get category counts
@@ -27,89 +27,55 @@ export default function Home() {
 
   return (
     <div className="homePage">
-      {/* Hero Section */}
       <section className="hero">
+        <div className="heroMedia" aria-hidden="true">
+          <img src="/images/Obsidian-Denim-Jacket.jpg" alt="" />
+          <img src="/images/Vanta Street Hoodie.jpg" alt="" />
+          <img src="/images/Satin Drift Shirt.jpg" alt="" />
+        </div>
         <div className="container heroGrid">
           <div className="heroCard">
-            <div className="heroBadge">New season / Lagos-ready pieces / Limited drops</div>
+            <div className="heroBadge">New season edit</div>
             <h1 className="heroTitle">
-              Dress like the <span className="heroTitleAccent">decision</span> is already made.
+              Streetwear, polish, and everyday essentials.
             </h1>
             <p className="heroDesc">
               Clean streetwear and smart casual essentials with sharp silhouettes, rich textures, and easy outfit confidence.
             </p>
             <div className="heroActions">
-              <Link className="btn primary heroCta" to="/shop">Shop Collection</Link>
-              <Link className="heroSecondary" to="/about">Our Story</Link>
-              <span className="heroSearchHint">
-                Press <kbd>Ctrl</kbd> + <kbd>K</kbd> to search
-              </span>
+              <Link className="btn primary heroCta" to="/shop">Shop new in</Link>
+              <Link className="heroSecondary" to="/shop?cat=Hoodies">Shop hoodies</Link>
             </div>
-            <div className="heroFeatures">
-              <div className="heroFeature">
-                <div className="heroFeatureTitle">Fresh Drops</div>
-                <div className="heroFeatureDesc">Pieces selected for standout everyday styling</div>
-              </div>
-              <div className="heroFeature">
-                <div className="heroFeatureTitle">Secure Checkout</div>
-                <div className="heroFeatureDesc">Protected order flow with Paystack payment</div>
-              </div>
-              <div className="heroFeature">
-                <div className="heroFeatureTitle">Lagos Delivery</div>
-                <div className="heroFeatureDesc">Fast local delivery and clear order details</div>
-              </div>
+            <div className="heroRetailBar">
+              <span>Fresh drops weekly</span>
+              <span>Secure checkout</span>
+              <span>Fast dispatch</span>
             </div>
           </div>
 
           <div className="heroArt">
-            <div className="heroVisual">
-              <div className="heroVisualHeader">
-                <div className="heroVisualDots">
-                  <div className="heroVisualDot"></div>
-                  <div className="heroVisualDot"></div>
-                  <div className="heroVisualDot"></div>
-                </div>
-                <span className="badge heroVisualBadge">Drop #07</span>
-              </div>
-           <div className="heroVisualGrid">
-  <div className="heroVisualItem">
-    <img
-      src="/images/Obsidian-Denim-Jacket.jpg"
-      alt="New Arrivals"
-      className="heroVisualImage"
-    />
-    <span className="heroVisualItemText">New Arrivals</span>
-  </div>
-
-  <div className="heroVisualItem">
-    <img
-      src="/images/Street-hoodie.jpg"
-      alt="Best Sellers"
-      className="heroVisualImage"
-    />
-    <span className="heroVisualItemText">Best Sellers</span>
-  </div>
-
-  <div className="heroVisualItem">
-    <img
-      src="/images/Wide-Leg-Trousers.jpg"
-      alt="Trending"
-      className="heroVisualImage"
-    />
-    <span className="heroVisualItemText">Trending</span>
-  </div>
-
-  <div className="heroVisualItem">
-    <img
-      src="/images/Satin Drift Shirt.jpg"
-      alt="Sale"
-      className="heroVisualImage"
-    />
-    <span className="heroVisualItemText">Sale</span>
-  </div>
-</div>
-            </div>
+            <Link className="heroLookCard heroLookTall" to="/shop">
+              <img src="/images/Obsidian-Denim-Jacket.jpg" alt="Model wearing denim outerwear" />
+              <span>Outerwear</span>
+            </Link>
+            <Link className="heroLookCard" to="/shop?cat=Hoodies">
+              <img src="/images/Street-hoodie.jpg" alt="Model wearing street hoodie" />
+              <span>Hoodies</span>
+            </Link>
+            <Link className="heroLookCard" to="/shop?cat=Bottoms">
+              <img src="/images/Wide-Leg-Trousers.jpg" alt="Wide leg trousers" />
+              <span>Bottoms</span>
+            </Link>
           </div>
+        </div>
+      </section>
+
+      <section className="retailStrip" aria-label="Store benefits">
+        <div className="container retailStripInner">
+          <span>New arrivals</span>
+          <span>Best sellers</span>
+          <span>Easy returns</span>
+          <span>Paystack protected</span>
         </div>
       </section>
 
@@ -118,10 +84,10 @@ export default function Home() {
         <div className="container">
           <div className="featuredHeader">
             <div>
-              <h2 className="featuredTitle">Featured Pieces</h2>
-              <p className="sectionIntro">Customer favorites that work from daytime plans to night moves.</p>
+              <h2 className="featuredTitle">Trending Now</h2>
+              <p className="sectionIntro">The pieces shoppers reach for first.</p>
             </div>
-            <Link className="featuredLink" to="/shop">View all &gt;</Link>
+            <Link className="featuredLink" to="/shop">View all</Link>
           </div>
           <div className="featuredGrid">
             {featured.map(p => (
@@ -137,14 +103,11 @@ export default function Home() {
       </section>
 
       
-      {/* Categories */}
 <section className="categoriesSection">
   <div className="container">
     <div className="categoriesHeader">
       <h2 className="categoriesTitle">Shop by Category</h2>
-      <p className="categoriesSubtitle">
-        Curated collections for every style
-      </p>
+      <p className="categoriesSubtitle">Shop the rails by category.</p>
     </div>
 
     <div className="categoriesGrid">
@@ -186,12 +149,11 @@ export default function Home() {
   </div>
 </section>
 
-      {/* Newsletter */}
       <section className="newsletterSection">
         <div className="container">
           <div className="newsletterCard">
             <div className="newsletterContent">
-              <h2 className="newsletterTitle">Join the Inner Circle</h2>
+              <h2 className="newsletterTitle">Get first access to every drop</h2>
               <p className="newsletterDesc">
                 Get exclusive access to new drops, member-only discounts, and styling tips from our team.
               </p>

@@ -38,15 +38,15 @@ export default function Product(){
   }
 
   return (
-    <div className="container section">
-      <div className="grid" style={{gridTemplateColumns:"1fr 1.1fr", gap:16}}>
-        <div className="card" style={{padding:0, overflow:"hidden"}}>
-          <img src={imageUrl(p.images?.[0])} alt={p.name} style={{width:"100%", height:420, objectFit:"cover"}} />
+    <div className="container section productDetailPage">
+      <div className="productDetailGrid">
+        <div className="productGallery">
+          <img src={imageUrl(p.images?.[0])} alt={p.name} />
         </div>
 
-        <div className="card" style={{padding:18}}>
+        <div className="productInfoPanel">
           <div className="badge">{p.badge} / ★ {Number(p.rating||0).toFixed(1)}</div>
-          <h1 className="h2" style={{margin:"10px 0 8px"}}>{p.name}</h1>
+          <h1 className="productDetailTitle">{p.name}</h1>
           <div className="small">{p.category} / {p.style} / {p.gender}</div>
 
           <div className="hr" />
@@ -56,7 +56,7 @@ export default function Product(){
             {p.compareAt ? <div className="small strike">{money(p.compareAt)}</div> : <div/>}
           </div>
 
-          <p className="p" style={{marginTop:12}}>{p.desc}</p>
+          <p className="p productDetailDesc">{p.desc}</p>
 
           <div className="grid" style={{gridTemplateColumns:"1fr 1fr", gap:12, marginTop:12}}>
             <div>
@@ -73,18 +73,18 @@ export default function Product(){
             </div>
           </div>
 
-          <div className="row" style={{marginTop:12}}>
+          <div className="row productBuyRow">
             <div style={{width:120}}>
               <div className="small">Qty</div>
               <input className="input" type="number" min="1" value={qty} onChange={(e)=>setQty(e.target.value)} />
             </div>
-            <button className="btn primary right" onClick={() => { add(p, { qty, size, color }); toast.push("Added to cart", "good"); }}>
+            <button className="btn primary right productAddButton" onClick={() => { add(p, { qty, size, color }); toast.push("Added to cart", "good"); }}>
               Add to cart
             </button>
           </div>
 
           <div className="hr" />
-          <div className="small">Shipping: <b>1-3 days</b> in Lagos. Returns: <b>7 days</b> after delivery.</div>
+          <div className="small">Shipping: <b>1-3 days</b> after confirmation. Returns: <b>7 days</b> after delivery.</div>
         </div>
       </div>
     </div>

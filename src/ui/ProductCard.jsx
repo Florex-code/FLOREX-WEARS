@@ -11,8 +11,8 @@ export default function ProductCard({ p, onQuickView, onAdd }){
         <div className="pBadge">{p.badge || "AVENOIR"}</div>
         <img src={imageUrl(p.images?.[0])} alt={p.name} loading="lazy" onError={(e)=>{e.currentTarget.style.opacity=.55}} />
         <div className="pHover">
-          <button className="btn primary" onClick={()=>onAdd?.(p)}>Add to cart</button>
-          <button className="btn" onClick={()=>onQuickView?.(p)}>Quick view</button>
+          <button className="btn primary" onClick={()=>onAdd?.(p)}>Add</button>
+          <button className="btn" onClick={()=>onQuickView?.(p)}>View</button>
           <Link className="btn ghost" to={`/product/${p.id}`}>Details</Link>
         </div>
       </div>

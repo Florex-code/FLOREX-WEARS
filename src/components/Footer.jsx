@@ -18,7 +18,7 @@ export default function Footer() {
             </div>
           </div>
           <p className="footerDesc">
-            A premium fashion house for refined streetwear, polished essentials, and confident daily dressing.
+            A modern fashion house for refined streetwear, polished essentials, and confident daily dressing.
             Designed in Lagos, styled for everywhere.
           </p>
           <div className="footerContact">

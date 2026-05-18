@@ -224,6 +224,22 @@
   opacity: 0.7;
 }
 
+[data-theme="light"] .footerDesc,
+[data-theme="light"] .footerTag,
+[data-theme="light"] .footerText,
+[data-theme="light"] .footerContact,
+[data-theme="light"] .footerLink,
+[data-theme="light"] .footerLegal,
+[data-theme="light"] .footerLegal a,
+[data-theme="light"] .footerTech {
+  color: rgba(18,16,13,.76);
+}
+
+[data-theme="light"] .footerInput {
+  background: #fff;
+  color: #12100d;
+}
+
 @media (max-width: 600px) {
   .footerBottomContent {
     flex-direction: column;
